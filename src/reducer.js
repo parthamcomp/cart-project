@@ -34,9 +34,12 @@ const reducer = (state, action) => {
       newCartRemove.delete(action.payload.id)
       return { ...state, cart: newCartRemove }
     case LOADING:
-      break
+      return { ...state, loading: true }
     case DISPLAY_ITEMS:
-      break
+      const newCartDisp = new Map(
+        action.payload.cart.map((item) => [item.id, item])
+      )
+      return { ...state, loading: false, cart: newCartDisp }
     default:
       throw new Error(`No matching action type : ${action.type}`)
   }
